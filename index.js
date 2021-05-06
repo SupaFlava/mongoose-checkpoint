@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+// connecting
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -12,7 +13,7 @@ mongoose
     console.log("error");
     console.log(err);
   });
-
+//create Schema
 const personeSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -24,13 +25,14 @@ const personeSchema = new mongoose.Schema({
     },
   ],
 });
+// create model
 let person = mongoose.model("Person", personeSchema);
 let personeOne = new person({
   name: "Neo",
   age: 44,
   favoriteFood: ["Pizza", "Lablabi"],
 });
-
+//saving
 personeOne
   .save()
   .then((data) => {
